@@ -3,7 +3,7 @@ import morgan from 'morgan';
 import cors from 'cors';
 import path from 'path';
 import mongoose from 'mongoose';
-import history from 'connect-history-api-fallback';
+const history = require('connect-history-api-fallback');
 
 const app = express();
 // const uri = 'mongodb://localhost:27017/lmnode'
@@ -19,8 +19,8 @@ app.use(morgan('tiny'));
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
-app.use(express.static(path.join(__dirname, 'public')));
 app.use(history());
+app.use(express.static(path.join(__dirname, 'public')));
 app.use('/api', require('./routes/nota'));
 
 // Conexión a MongoDB
